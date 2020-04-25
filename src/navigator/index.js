@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 export default function NavigationStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="RegisterScreen">
+      <Stack.Navigator initialRouteName="WelcomeScreen">
         {/* ScreenNames */}
         <Stack.Screen
           name="WelcomeScreen"

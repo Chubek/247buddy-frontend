@@ -9,6 +9,7 @@ import {
   Image,
   Text,
   Button,
+  ButtonGroup,
 } from "react-native-elements";
 import * as helpers from "../../helpers/";
 import * as en from "../../localization/en.json";
@@ -29,7 +30,7 @@ export default class LoginPageComponent extends Component {
 
   updateIndex(newIndices) {
     this.setState({
-      selectedIndices: [...this.state.selectedIndices, ...newIndices],
+      selectedIndices: [...newIndices],
     });
   }
 
@@ -58,7 +59,7 @@ export default class LoginPageComponent extends Component {
   onValidatePhoneNumber = (v) => {
     const pattern = / ^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$ /;
     if (pattern.test(v)) {
-      this.setState({ valid: true });
+      this.setState({ valid: true, number: v });
     } else {
       this.setState({
         valid: false,
@@ -75,17 +76,12 @@ export default class LoginPageComponent extends Component {
           <Row size={30} style={styles.inputField}>
             <Col size={90}>
               <Input
-                leftIcon={{ type: "font-awesome", name: "user" }}
+                leftIcon={{ type: "font-awesome", name: "user", color: "#f21" }}
                 label={en.registerPage.userName}
+                labelStyle={styles.inputLabelStyle}
+                inputStyle={styles.inputStyle}
                 onChange={(v) => this.setState({ userName: v })}
               />
-            </Col>
-            <Col size={10}>
-              <Tooltip
-                popover={<Text>{en.listenerLoginPage.userNameInfo}</Text>}
-              >
-                <Icon name="question-circle" type="font-awesome" color="#f80" />
-              </Tooltip>
             </Col>
           </Row>
           <Row size={30} style={styles.inputField}>
@@ -94,47 +90,56 @@ export default class LoginPageComponent extends Component {
                 leftIcon={{
                   type: "font-awesome",
                   name: "envelope",
+                  color: "#f21",
                 }}
                 label={en.registerPage.email}
+                labelStyle={styles.inputLabelStyle}
+                inputStyle={styles.inputStyle}
                 onChange={(v) => this.setState({ email: v })}
               />
             </Col>
-            <Col size={10}>
-              <Tooltip popover={<Text>{en.listenerLoginPage.emailInfo}</Text>}>
-                <Icon name="question-circle" type="font-awesome" color="#f80" />
-              </Tooltip>
-            </Col>
           </Row>
           <Row size={100}>
-            <ButtonGroup
-              onPress={(v) => this.updateIndex(v)}
-              selectedIndexes={selectedIndices}
-              buttons={buttons}
-              containerStyle={{ height: 100 }}
-              selectMultiple
-            />
+            <Col size={100}>
+              <ButtonGroup
+                onPress={(v) => this.updateIndex(v)}
+                selectedIndexes={selectedIndices}
+                buttons={buttons}
+                containerStyle={styles.buttonGroupContainerStyle}
+                buttonStyle={styles.buttonGroupStyle}
+                textStyle={styles.buttonGroupTextStyle}
+                selectedButtonStyle={styles.buttonGroupSelectedStyle}
+                selectedTextStyle={styles.buttonGroupSelectedTextStyle}
+                selectMultiple
+              />
+            </Col>
           </Row>
-          <Row size={30} style={styles.inputField}>
+          <Row size={50} style={styles.inputField}>
             <Col size={90}>
               <Input
                 leftIcon={{
                   type: "font-awesome",
                   name: "mobile",
+                  color: "#f21",
                 }}
                 label={en.registerPage.phoneNumber}
+                labelStyle={styles.inputLabelStyle}
+                inputStyle={styles.inputStyle}
                 onChange={(v) => {
                   this.onValidatePhoneNumber(v);
-                  this.setState({ phoneNumber: v });
                 }}
               />
             </Col>
             <Col size={10}>
-              <Tooltip popover={<Text>{en.listenerLoginPage.numberInfo}</Text>}>
+              <Tooltip
+                height={100}
+                popover={<Text>{en.registerPage.numberInfo}</Text>}
+              >
                 <Icon name="question-circle" type="font-awesome" color="#f80" />
               </Tooltip>
             </Col>
           </Row>
-          <Row size={70}>
+          <Row size={20}>
             <Col size={90}>
               <Button
                 icon={{
@@ -142,6 +147,7 @@ export default class LoginPageComponent extends Component {
                   name: "user-plus",
                   color: "white",
                 }}
+                buttonStyle={styles.submitButtonStyle}
                 title={en.registerPage.register}
                 onPress={() => this.onRegisterUser()}
               />
@@ -158,26 +164,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",
+    padding: 20,
   },
-  form: {
-    marginTop: 100,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  itemContainer: {
-    margin: 20,
-  },
-  icon: {
-    color: "#F3FFBD",
-    marginLeft: 25,
+  inputField: {
+    marginTop: 20,
   },
   input: {
     color: "#fff",
     borderBottomWidth: 20,
   },
-  submitButton: {
-    marginTop: 30,
-    backgroundColor: "#D1B3C4",
+  submitButtonStyle: {
+    backgroundColor: "#b5146c",
+    borderRadius: 20,
   },
   label: {
     color: "#582630",
@@ -207,5 +205,21 @@ const styles = StyleSheet.create({
   bullseye: {
     marginLeft: -25,
     fontSize: 40,
+  },
+  buttonGroupContainerStyle: { height: 50 },
+  buttonGroupStyle: {
+    backgroundColor: "#bd2a2a",
+  },
+  buttonGroupTextStyle: {
+    color: "#ff6",
+  },
+  buttonGroupSelectedStyle: {
+    backgroundColor: "#ff0241",
+  },
+  buttonGroupSelectedTextStyle: {
+    color: "#fff",
+  },
+  inputLabelStyle: {
+    color: "#f5bcdb",
   },
 });

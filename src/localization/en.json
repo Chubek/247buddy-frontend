@@ -17,8 +17,8 @@
     "userNameInfo": "Your username here.",
     "email": "Your Email",
     "emailInfo": "Your email here.",
-    "phoneNumber": "Your Phone Number. It must be Indian. Press the bullseye icon to automatically get your number.",
-    "numberInfo": "Your email here.",
+    "phoneNumber": "Your Phone Number",
+    "numberInfo": "Your email here.  It must be Indian. Press the bullseye icon to automatically get your number.",
     "register": "Register",
     "numberErr": "Your number is not Indian.",
     "placeholderEmail": "user@address.com"
